@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class HitPointManager : MonoBehaviour {
 
     public int hitPoints;
     public int maxHitPoints;
+    public GameObject slider;
 
 	// Use this for initialization
 	void Start () {
@@ -13,6 +15,10 @@ public class HitPointManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if (slider != null)
+        {
+            slider.GetComponent<Slider>().value = ((float)hitPoints) / maxHitPoints;
+        }
 	
 	}
 

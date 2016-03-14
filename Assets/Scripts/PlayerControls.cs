@@ -5,6 +5,7 @@ using System;
 public class PlayerControls : MonoBehaviour {
 
     EntityInfo entityInfo;
+    public bool cheatsOn = true;
 
     // Use this for initialization
     void Start ()
@@ -60,6 +61,19 @@ public class PlayerControls : MonoBehaviour {
         if (Input.GetKey(KeyCode.W)) // Jump
         {
             entityInfo.jump();
+        }
+
+        if (cheatsOn)
+        {
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+
+                gameObject.GetComponent<HitPointManager>().addHP(1);
+            }
+            if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                gameObject.GetComponent<HitPointManager>().subtractHP(1);
+            }
         }
     }
 }
