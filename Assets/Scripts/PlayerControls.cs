@@ -6,6 +6,10 @@ public class PlayerControls : MonoBehaviour {
 
     EntityInfo entityInfo;
     public bool cheatsOn = true;
+    public GameObject lookObject;
+    public GameObject equippedGun;
+
+   // GunManager ak47Manager;
 
     // Use this for initialization
     void Start ()
@@ -23,10 +27,9 @@ public class PlayerControls : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        
         Vector3 characterPosition = transform.position;
-        Vector3 closestPoint = GetPointToLine(ray.origin, ray.direction, characterPosition) + characterPosition;
+        Vector3 closestPoint = lookObject.transform.position;
       
         if (characterPosition.z < closestPoint.z)
         {
@@ -63,14 +66,22 @@ public class PlayerControls : MonoBehaviour {
             entityInfo.jump();
         }
 
+        if (Input.GetMouseButton(0)) // Left button click
+        {
+            if (equippedGun != null && equippedGun.GetComponent<GunManager>().canShoot())
+            {
+                Debug.Log("Pew\n");
+            }
+        }
+
         if (cheatsOn)
         {
-            if (Input.GetKeyDown(KeyCode.UpArrow))
+            if (Input.GetKeyDown(KeyCode.CapsLock))
             {
 
                 gameObject.GetComponent<HitPointManager>().addHP(1);
             }
-            if (Input.GetKeyDown(KeyCode.DownArrow))
+            if (Input.GetKeyDown(KeyCode.LeftShift))
             {
                 gameObject.GetComponent<HitPointManager>().subtractHP(1);
             }

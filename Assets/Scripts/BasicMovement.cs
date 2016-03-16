@@ -21,7 +21,7 @@ public class BasicMovement : MonoBehaviour {
 
         Vector3 movementVector = entityInfo.getCurrentMovementVector();
 
-        characterController.Move(movementVector);
+        characterController.Move(movementVector * gameObject.transform.localScale.magnitude);
 
         animator.SetFloat("MovementSpeed", characterController.velocity.z * entityInfo.getFacing());
         animator.SetFloat("VerticalSpeed", characterController.velocity.y);
