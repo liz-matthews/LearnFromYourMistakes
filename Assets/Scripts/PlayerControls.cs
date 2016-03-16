@@ -28,10 +28,7 @@ public class PlayerControls : MonoBehaviour {
     void Update()
     {
         
-        Vector3 characterPosition = transform.position;
-        Vector3 closestPoint = lookObject.transform.position;
-      
-        if (characterPosition.z < closestPoint.z)
+        if (transform.position.z < lookObject.transform.position.z)
         {
             entityInfo.setFacing(1);
         }
@@ -65,6 +62,8 @@ public class PlayerControls : MonoBehaviour {
         {
             entityInfo.jump();
         }
+
+        Debug.Log("mousebutton? " + Input.GetMouseButton(0));
 
         if (Input.GetMouseButton(0)) // Left button click
         {
