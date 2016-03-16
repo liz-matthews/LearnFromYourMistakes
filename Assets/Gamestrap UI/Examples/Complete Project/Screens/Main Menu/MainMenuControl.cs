@@ -28,7 +28,7 @@ namespace Gamestrap
         #region Event Methods Called from the UI
         public void PlayClick()
         {
-            GSAppExampleControl.Instance.LoadScene(ESceneNames.Levels);
+			Application.LoadLevel ("Scene1");
         }
 
         public void AchievementsClick()
