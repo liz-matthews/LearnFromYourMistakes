@@ -5,10 +5,12 @@ public class GunManager : MonoBehaviour {
     
     public float bulletDelay;
     float currentTime;
+    Aiming aiming;
       
     // Use this for initialization
     void Start () {
         currentTime = bulletDelay;
+        aiming = gameObject.GetComponent<Aiming>();
 	
 	}
 
@@ -26,7 +28,13 @@ public class GunManager : MonoBehaviour {
             currentTime = 0;
         } else
         {
+            float lerp = currentTime / bulletDelay;
+            if (lerp > 1.0f)
+            {
+                lerp = 1.0f;
+            }
 
+            aiming.setRadius(lerp);
         }
 
         return retVal;
