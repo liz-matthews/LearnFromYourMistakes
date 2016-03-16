@@ -83,28 +83,27 @@ public class EntityInfo : MonoBehaviour {
     float landedAnimTime = 0.5f;
     float jumpHeightOffset = 0.5f;
     float jumpYOffset = 0.0f;
+    
 
-
-
-    float startAcceleration;
-    float stopAcceleration;
-    float topSpeed;
-    float gravity;
-    float topFallSpeed;
-    float jumpSpeed;
+    public float startAcceleration;
+    public float stopAcceleration;
+    public float topSpeed;
+    public float gravity;
+    public float topFallSpeed;
+    public float jumpSpeed;
     int state;
     int facing;
     bool inAir;
-    float hitboxHeightOffset;
-    float hitboxYOffset;
+    //float hitboxHeightOffset;
+    //float hitboxYOffset;
 
     Vector3 movementVector;
-    
-    
-    
+
+    int PLAYTESTING = 0;
+
 
     // Use this for initialization
-    void Start ()
+    void Start()
     {
         characterController = gameObject.GetComponent<CharacterController>();
 
@@ -121,13 +120,38 @@ public class EntityInfo : MonoBehaviour {
         landTimer = new AnimationTimer(landedAnimTime, characterController.height - jumpHeightOffset, characterController.height,
             characterController.center.y - jumpYOffset, characterController.center.y);
 
-        gravity = -0.15f;
-        jumpSpeed = 0.3f;
-        topFallSpeed = Mathf.Abs(gravity) * 4;
+        switch (PLAYTESTING)
+        {
+            case 0:
+                gravity = -0.15f;
+                jumpSpeed = 0.3f;
+                topFallSpeed = Mathf.Abs(gravity) * 4;
 
-        startAcceleration = 0.2f;
-        stopAcceleration = 0.5f;
-        topSpeed = 0.2f;
+                startAcceleration = 0.2f;
+                stopAcceleration = 0.5f;
+                topSpeed = 0.2f;
+                break;
+            case 1:
+                gravity = -0.15f;
+                jumpSpeed = 0.3f;
+                topFallSpeed = Mathf.Abs(gravity) * 4;
+
+                startAcceleration = 0.2f;
+                stopAcceleration = 0.5f;
+                topSpeed = 0.2f;
+                break;
+            case 2:
+                gravity = -0.15f;
+                jumpSpeed = 0.3f;
+                topFallSpeed = Mathf.Abs(gravity) * 4;
+
+                startAcceleration = 0.2f;
+                stopAcceleration = 0.5f;
+                topSpeed = 0.2f;
+                break;
+
+
+        }
 
         state = 0;  // idle       = 0
                     // move right = 1
