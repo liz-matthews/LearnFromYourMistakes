@@ -1,5 +1,1 @@
-<<<<<<< HEAD
 Branch Location
-=======
-Master Location
->>>>>>> refs/remotes/origin/master
