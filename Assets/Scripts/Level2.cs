@@ -14,6 +14,6 @@ public class Level2 : MonoBehaviour {
 	}
 	
 	void OnTriggerEnter(Collider hit) {
-		Application.LoadLevel("SecondSceneV1.0");
+		Application.LoadLevel("Scene2");
 	}
 }
