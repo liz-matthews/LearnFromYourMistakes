@@ -4,6 +4,7 @@ using System.Collections;
 public class GunManager : MonoBehaviour {
     
     public float bulletDelay;
+    public float aimDistance;
     float currentTime;
     Aiming aiming;
       

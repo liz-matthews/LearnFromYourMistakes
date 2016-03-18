@@ -8,6 +8,8 @@ public class PlayerControls : MonoBehaviour {
     public bool cheatsOn = true;
     public GameObject lookObject;
     public GameObject equippedGun;
+    RaycastHit hitInfo;
+    Ray shootRay;
 
    // GunManager ak47Manager;
 
@@ -63,13 +65,24 @@ public class PlayerControls : MonoBehaviour {
             entityInfo.jump();
         }
 
-        Debug.Log("mousebutton? " + Input.GetMouseButton(0));
 
+
+       
+        shootRay = new Ray(equippedGun.transform.position, lookObject.transform.position - equippedGun.transform.position);
+        Debug.DrawLine(equippedGun.transform.position, lookObject.transform.position);
         if (Input.GetMouseButton(0)) // Left button click
         {
             if (equippedGun != null && equippedGun.GetComponent<GunManager>().canShoot())
             {
                 Debug.Log("Pew\n");
+                
+                if (Physics.Raycast(shootRay, out hitInfo, equippedGun.GetComponent<GunManager>().aimDistance))
+                {
+                    // Hit something
+                    Debug.Log("Hit!");
+                    Instantiate(equippedGun.transform.Find("Bullet"), hitInfo.point, Quaternion.identity);
+                }
+
             }
         }
 
