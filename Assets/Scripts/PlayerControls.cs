@@ -10,20 +10,11 @@ public class PlayerControls : MonoBehaviour {
     public GameObject equippedGun;
     RaycastHit hitInfo;
     Ray shootRay;
-
-   // GunManager ak47Manager;
-
+    
     // Use this for initialization
     void Start ()
     {
         entityInfo = gameObject.GetComponent<EntityInfo>();
-    }
-
-
-    static public Vector3 GetPointToLine(Vector3 origin, Vector3 direction, Vector3 point){
-        Vector3 point2origin = origin - point;
-        Vector3 point2closestPointOnLine = point2origin - Vector3.Dot(point2origin,direction) * direction;
-        return point2closestPointOnLine;
     }
 
     // Update is called once per frame
@@ -74,13 +65,19 @@ public class PlayerControls : MonoBehaviour {
         {
             if (equippedGun != null && equippedGun.GetComponent<GunManager>().canShoot())
             {
-                Debug.Log("Pew\n");
-                
+                //equippedGun.GetComponent<GunManager>().muzzleFlash.GetComponent<ParticleSystem>().Play();
+
                 if (Physics.Raycast(shootRay, out hitInfo, equippedGun.GetComponent<GunManager>().aimDistance))
                 {
                     // Hit something
-                    Debug.Log("Hit!");
-                    Instantiate(equippedGun.transform.Find("Bullet"), hitInfo.point, Quaternion.identity);
+                    UnityEngine.Object clone = Instantiate(equippedGun.GetComponent<GunManager>().bullet, hitInfo.point, Quaternion.identity);
+                    Destroy(clone, 1f);
+
+                    if (hitInfo.collider.tag == "Boss")
+                    {
+                        GameObject.Find("GIANT_WORM").GetComponent<HitPointManager>().subtractHP(equippedGun.GetComponent<GunManager>().damage);
+                    }
+
                 }
 
             }
