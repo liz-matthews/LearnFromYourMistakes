@@ -94,36 +94,27 @@ public class EntityInfo : MonoBehaviour {
     int state;
     int facing;
     bool inAir;
-    //float hitboxHeightOffset;
-    //float hitboxYOffset;
 
     Vector3 movementVector;
 
-    int PLAYTESTING = 0;
+    public int PLAYTESTING;
+    public bool FREEFORM;
 
-
-    // Use this for initialization
-    void Start()
+    void setPhysics()
     {
-        characterController = gameObject.GetComponent<CharacterController>();
-
-
-        crouchToStandTimer = new AnimationTimer(crouchAnimTime, characterController.height - crouchHeightOffset, characterController.height,
-            characterController.center.y - crouchYOffset, characterController.center.y);
-
-        standToCrouchTimer = new AnimationTimer(crouchAnimTime, characterController.height, characterController.height - crouchHeightOffset,
-            characterController.center.y, characterController.center.y - crouchYOffset);
-
-        jumpTimer = new AnimationTimer(jumpAnimTime, characterController.height, characterController.height - jumpHeightOffset,
-            characterController.center.y, characterController.center.y - jumpYOffset);
-
-        landTimer = new AnimationTimer(landedAnimTime, characterController.height - jumpHeightOffset, characterController.height,
-            characterController.center.y - jumpYOffset, characterController.center.y);
-
         switch (PLAYTESTING)
         {
             case 0:
-                gravity = -0.15f;
+            default:
+                //gravity = -0.15f;
+                //jumpSpeed = 0.3f;
+                //topFallSpeed = Mathf.Abs(gravity) * 4;
+
+                //                startAcceleration = 0.2f;
+                //              stopAcceleration = 0.5f;
+                //            topSpeed = 0.2f;
+                //          break;
+                gravity = -0.5f;
                 jumpSpeed = 0.3f;
                 topFallSpeed = Mathf.Abs(gravity) * 4;
 
@@ -133,21 +124,21 @@ public class EntityInfo : MonoBehaviour {
                 break;
             case 1:
                 gravity = -0.15f;
-                jumpSpeed = 0.3f;
+                jumpSpeed = 0.1f;
                 topFallSpeed = Mathf.Abs(gravity) * 4;
 
-                startAcceleration = 0.2f;
-                stopAcceleration = 0.5f;
-                topSpeed = 0.2f;
+                startAcceleration = 0.1f;
+                stopAcceleration = 0.3f;
+                topSpeed = 0.15f;
                 break;
             case 2:
                 gravity = -0.15f;
-                jumpSpeed = 0.3f;
+                jumpSpeed = 0.2f;
                 topFallSpeed = Mathf.Abs(gravity) * 4;
 
-                startAcceleration = 0.2f;
+                startAcceleration = 0.5f;
                 stopAcceleration = 0.5f;
-                topSpeed = 0.2f;
+                topSpeed = 0.1f;
                 break;
 
             case 3:
@@ -162,6 +153,29 @@ public class EntityInfo : MonoBehaviour {
 
 
         }
+    }
+
+    // Use this for initialization
+    void Start()
+    {
+        characterController = gameObject.GetComponent<CharacterController>();
+        //PLAYTESTING = 0;
+        FREEFORM = false;
+
+
+        crouchToStandTimer = new AnimationTimer(crouchAnimTime, characterController.height - crouchHeightOffset, characterController.height,
+            characterController.center.y - crouchYOffset, characterController.center.y);
+
+        standToCrouchTimer = new AnimationTimer(crouchAnimTime, characterController.height, characterController.height - crouchHeightOffset,
+            characterController.center.y, characterController.center.y - crouchYOffset);
+
+        jumpTimer = new AnimationTimer(jumpAnimTime, characterController.height, characterController.height - jumpHeightOffset,
+            characterController.center.y, characterController.center.y - jumpYOffset);
+
+        landTimer = new AnimationTimer(landedAnimTime, characterController.height - jumpHeightOffset, characterController.height,
+            characterController.center.y - jumpYOffset, characterController.center.y);
+
+        
 
         state = 0;  // idle       = 0
                     // move right = 1
@@ -170,12 +184,17 @@ public class EntityInfo : MonoBehaviour {
         facing = 1; // face right = 1
                     // face left = -1
 
+        setPhysics();
         movementVector = Vector3.zero;
         inAir = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+        if (!FREEFORM)
+        {
+            setPhysics();
+        }
         
         switch (state)
         {
