@@ -150,16 +150,6 @@ public class EntityInfo : MonoBehaviour {
                 topSpeed = 0.2f;
                 break;
 
-            case 3:
-                gravity = -0.15f;
-                jumpSpeed = 0.15f;
-                topFallSpeed = Mathf.Abs(gravity) * 4;
-
-                startAcceleration = 0.2f;
-                stopAcceleration = 0.2f;
-                topSpeed = 0.07f;
-                break;
-
 
         }
 

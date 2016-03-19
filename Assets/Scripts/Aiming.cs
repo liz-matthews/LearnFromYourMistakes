@@ -13,14 +13,11 @@ public class Aiming : MonoBehaviour {
     public float aimingRadius;
     float recoilRadius;
     float currentRadius;
-    float scale;
 
 	// Use this for initialization
 	void Start ()
     {
         currentRadius = aimingRadius;
-        scale = transform.parent.localScale.z;
-        
         
     }
 	
@@ -28,17 +25,16 @@ public class Aiming : MonoBehaviour {
 	void Update () {
         if (mainCharacter && aimPoint)
         {
-            // mainCharacter.transform.localScale.y * 
             recoilRadius = aimingRadius * 0.9f;
             mainCharController = mainCharacter.GetComponent<CharacterController>();
 
             Vector3 origin = mainCharacter.transform.TransformPoint(mainCharController.center);
-            origin.y += (mainCharController.height / 2 - heightOffset) * scale;
-            origin.x += widthOffset * scale * mainCharacter.GetComponent<EntityInfo>().getFacing();
+            origin.y += mainCharController.height / 2 - heightOffset;
+            origin.x += widthOffset * mainCharacter.GetComponent<EntityInfo>().getFacing();
             
             Vector3 aimingVector = aimPoint.transform.position - origin;
             aimingVector.Normalize();
-            aimingVector *= currentRadius * scale;
+            aimingVector *= currentRadius * mainCharacter.transform.localScale.y;
 
             gameObject.transform.position = origin + aimingVector;
             gameObject.transform.LookAt(origin + aimingVector * 2);

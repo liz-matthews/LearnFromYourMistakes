@@ -4,16 +4,8 @@ using System.Collections;
 public class GunManager : MonoBehaviour {
     
     public float bulletDelay;
-    public float aimDistance;
-    public int damage;
     float currentTime;
     Aiming aiming;
-    public GameObject muzzleFlash;
-    public GameObject hitEffect;
-    public GameObject bullet;
-
-
-    
       
     // Use this for initialization
     void Start () {
@@ -26,11 +18,6 @@ public class GunManager : MonoBehaviour {
     public void Update()
     {
         currentTime += Time.deltaTime;
-        //Vector3 loc = muzzleFlash.transform.position;
-        //loc = gameObject.transform.position;
-        //loc.y += 1;
-        //muzzleFlash.transform.position = loc;
-        
     }
 
     internal bool canShoot()
@@ -39,9 +26,6 @@ public class GunManager : MonoBehaviour {
         if (retVal)
         {
             currentTime = 0;
-
-            gameObject.transform.Find("AK47MuzzleFlash").GetComponent<ParticleSystem>().Play();
-
         } else
         {
             float lerp = currentTime / bulletDelay;
