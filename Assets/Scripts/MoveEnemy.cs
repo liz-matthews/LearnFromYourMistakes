@@ -9,13 +9,13 @@ public class MoveEnemy : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+		GetComponent<Animation>().Play ("ariseHigh");
 		StartCoroutine ("waitTime");
 
 	}
 
 	IEnumerator waitTime(){
-		GetComponent<Animation>().Play ("ariseHigh");
+		
 		yield return new WaitForSeconds (2.0f);
 		GetComponent<Animation> ().Play ("idleBreatheHigh");
 	}
@@ -40,11 +40,14 @@ public class MoveEnemy : MonoBehaviour {
 
 	//Mudball Attack
 	void Mudball(){
+		GetComponent<Animation> ().wrapMode = WrapMode.Once;
 		GetComponent<Animation> ().Play ("spitHigh");
 
 		//Projectile code
 
 		//Damage code
+
+		StartCoroutine ("waitTime");
 	}
 
 	//Underground Bite attack
