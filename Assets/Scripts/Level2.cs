@@ -14,6 +14,8 @@ public class Level2 : MonoBehaviour {
 	}
 	
 	void OnTriggerEnter(Collider hit) {
-		Application.LoadLevel("Scene2");
+		if (GameObject.Find ("GIANT_WORM").GetComponent<HitPointManager> ().isDead ()) {
+			Application.LoadLevel ("Scene2");
+		}
 	}
 }
