@@ -94,6 +94,22 @@ public class PlayerControls : MonoBehaviour {
             {
                 gameObject.GetComponent<HitPointManager>().subtractHP(1);
             }
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                GameObject.Find("GIANT_WORM").GetComponent<LearningSystem>().updateAttack(0, 1);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                GameObject.Find("GIANT_WORM").GetComponent<LearningSystem>().updateAttack(1, 1);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                GameObject.Find("GIANT_WORM").GetComponent<LearningSystem>().updateAttack(2, 1);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha4))
+            {
+                GameObject.Find("GIANT_WORM").GetComponent<LearningSystem>().updateAttack(3, 1);
+            }
         }
     }
 }
