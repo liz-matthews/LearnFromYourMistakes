@@ -11,8 +11,12 @@ public class MoveEnemy : MonoBehaviour {
 	float attackRate  = 6.0f;
 	float nextAttack  = 0.0f;
 
+	LearningSystem ls;
+
 	// Use this for initialization
 	void Start () {
+		ls = GetComponent<LearningSystem> ();
+
 		GetComponent<Animation> ().Play ("ariseHigh");
 		player = GameObject.Find("Player");
 		boss1 = GameObject.Find("GIANT_WORM");
@@ -52,7 +56,9 @@ public class MoveEnemy : MonoBehaviour {
 	}
 
 	void Attack() {
-		int attack = Random.Range (0, 4);
+		//int attack = Random.Range (0, 4);
+		int attack;
+		attack = ls.getAttack();
 
 		if (attack == 0) {
 			boss1.transform.position = new Vector3(transform.position.x,transform.position.y,go1.transform.position.z);
@@ -74,11 +80,11 @@ public class MoveEnemy : MonoBehaviour {
 			GetComponent<Animation> ().Play ("ariseHigh");
 			StartCoroutine ("waitTime");
 		}
-		else if (attack == 4) {
-			boss1.transform.position = new Vector3(transform.position.x,transform.position.y,go2.transform.position.z);
-			GetComponent<Animation> ().Play ("ariseHigh");
-			StartCoroutine ("waitTime");
-		}
+//		else if (attack == 4) {
+//			boss1.transform.position = new Vector3(transform.position.x,transform.position.y,go2.transform.position.z);
+//			GetComponent<Animation> ().Play ("ariseHigh");
+//			StartCoroutine ("waitTime");
+//		}
 
 	}
 	// Update is called once per frame
