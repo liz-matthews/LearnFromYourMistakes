@@ -7,6 +7,7 @@ public class LearningSystem : MonoBehaviour {
 
     int minValue = 1;
     int totalTokens;
+    Random randomizer;
     
     public int numberOfAttacks;
 
@@ -32,10 +33,10 @@ public class LearningSystem : MonoBehaviour {
         buckets[attackIndex] += updateValue;
         totalTokens += updateValue;
 
-        if (buckets[attackIndex] < 0)
+        if (buckets[attackIndex] < minValue)
         {
-            totalTokens += buckets[attackIndex];
-            buckets[attackIndex] = 0;
+            totalTokens += minValue - buckets[attackIndex];
+            buckets[attackIndex] = minValue;
         }
     }
 
