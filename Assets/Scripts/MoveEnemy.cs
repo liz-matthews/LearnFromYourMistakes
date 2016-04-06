@@ -3,10 +3,22 @@ using System.Collections;
 
 public class MoveEnemy : MonoBehaviour {
 
-	Vector3 pos;
+	GameObject player;
+	GameObject boss1;
+	GameObject go1;
+	GameObject go2;
+	GameObject go3;
+	float attackRate  = 6.0f;
+	float nextAttack  = 0.0f;
+
 	// Use this for initialization
 	void Start () {
-		GetComponent<Animation>().Play ("ariseHigh");
+		GetComponent<Animation> ().Play ("ariseHigh");
+		player = GameObject.Find("Player");
+		boss1 = GameObject.Find("GIANT_WORM");
+		go1 = GameObject.Find("GameObject1");
+		go2 = GameObject.Find("GameObject2");
+		go3 = GameObject.Find("GameObject3");
 		StartCoroutine ("waitTime");
 
 	}
@@ -36,19 +48,52 @@ public class MoveEnemy : MonoBehaviour {
 
 	//Underground Bite attack
 	void UndergroundBite(){
-		//GetComponent<Animation> () ["disappearHigh"].wrapMode = WrapMode.Once;
-		//GetComponent<Animation> ().Play ("disappearHigh");
-
-		//pos = GameObject.Find("Player").transform.position;
-
 		GetComponent<Animation> ().Play ("UndergroundBite");
-		//Damage code
+	}
+
+	void Attack() {
+		int attack = Random.Range (0, 4);
+
+		if (attack == 0) {
+			boss1.transform.position = new Vector3(transform.position.x,transform.position.y,go1.transform.position.z);
+			GetComponent<Animation> ().Play ("ariseHigh");
+			StartCoroutine ("waitTime");
+		}
+		else if (attack == 1) {
+			boss1.transform.position = new Vector3(transform.position.x,transform.position.y,go3.transform.position.z);
+			GetComponent<Animation> ().Play ("ariseHigh");
+			StartCoroutine ("waitTime");
+		}
+		else if (attack == 2) {
+			boss1.transform.position = new Vector3(transform.position.x,transform.position.y,go2.transform.position.z);
+			GetComponent<Animation> ().Play ("ariseHigh");
+			StartCoroutine ("waitTime");
+		}
+		else if (attack == 3) {
+			boss1.transform.position = new Vector3(transform.position.x,transform.position.y,go2.transform.position.z);
+			GetComponent<Animation> ().Play ("ariseHigh");
+			StartCoroutine ("waitTime");
+		}
+		else if (attack == 4) {
+			boss1.transform.position = new Vector3(transform.position.x,transform.position.y,go2.transform.position.z);
+			GetComponent<Animation> ().Play ("ariseHigh");
+			StartCoroutine ("waitTime");
+		}
+
 	}
 	// Update is called once per frame
 	void Update () {
+		if (Time.time > nextAttack) {
+			//Attack ();
+			nextAttack = Time.time + attackRate;
+
+
+			
+		}
 		 //use it to test various animations
-		 	if (Input.GetKey("up")){
-			UndergroundBite ();
+		if (Input.GetKey("up")){
+			//boss1.transform.position = go1.transform.position;
+			Attack ();
 		}
 
 	}
