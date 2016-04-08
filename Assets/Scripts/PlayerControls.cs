@@ -65,7 +65,6 @@ public class PlayerControls : MonoBehaviour {
         {
             if (equippedGun != null && equippedGun.GetComponent<GunManager>().canShoot())
             {
-                //equippedGun.GetComponent<GunManager>().muzzleFlash.GetComponent<ParticleSystem>().Play();
 
                 if (Physics.Raycast(shootRay, out hitInfo, equippedGun.GetComponent<GunManager>().aimDistance))
                 {
@@ -75,7 +74,7 @@ public class PlayerControls : MonoBehaviour {
 
                     if (hitInfo.collider.tag == "Boss")
                     {
-                        GameObject.Find("GIANT_WORM").GetComponent<HitPointManager>().subtractHP(equippedGun.GetComponent<GunManager>().damage);
+                        hitInfo.collider.transform.gameObject.GetComponent<HitPointManager>().subtractHP(equippedGun.GetComponent<GunManager>().damage);
                     }
 
                 }
