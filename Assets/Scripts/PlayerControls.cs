@@ -20,6 +20,7 @@ public class PlayerControls : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+		transform.position = new Vector3 (500,transform.position.y,transform.position.z) ;
         
         if (transform.position.z < lookObject.transform.position.z)
         {

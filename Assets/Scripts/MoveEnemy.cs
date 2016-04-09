@@ -80,11 +80,7 @@ public class MoveEnemy : MonoBehaviour {
 			GetComponent<Animation> ().Play ("ariseHigh");
 			StartCoroutine ("waitTime");
 		}
-//		else if (attack == 4) {
-//			boss1.transform.position = new Vector3(transform.position.x,transform.position.y,go2.transform.position.z);
-//			GetComponent<Animation> ().Play ("ariseHigh");
-//			StartCoroutine ("waitTime");
-//		}
+
 
 	}
 	// Update is called once per frame
