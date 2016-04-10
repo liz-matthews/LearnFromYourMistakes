@@ -48,7 +48,7 @@ public class MoveWorm : MonoBehaviour {
 
 		}
 		else if (attack == 3) {
-			Puke ();
+			Puke();
 
 		}
 	}
@@ -95,7 +95,6 @@ public class MoveWorm : MonoBehaviour {
 		}
 		
 		else if (attack == "spit"){
-			print ("HILLARY");
 			int choice = Random.Range(1,3);
 			if(choice == 1) {
 				boss1.transform.position = new Vector3(transform.position.x,transform.position.y,go1.transform.position.z);
@@ -106,7 +105,6 @@ public class MoveWorm : MonoBehaviour {
 		}
 		
 		else if (attack == "roarpuke"){
-			print ("HI");
 			int choice = Random.Range(1,3);
 			if(choice == 1) {
 				boss1.transform.position = new Vector3(transform.position.x,transform.position.y,go1.transform.position.z);
@@ -115,6 +113,11 @@ public class MoveWorm : MonoBehaviour {
 				boss1.transform.position = new Vector3(transform.position.x,transform.position.y,go3.transform.position.z);
 			}
 		}
+	}
+
+
+	void fade() {
+		boss1.SetActive(false);
 	}
 
 	// Update is called once per frame
@@ -131,10 +134,26 @@ public class MoveWorm : MonoBehaviour {
 			setFacing(-1);
 		}
 
+		if (boss1.GetComponent<HitPointManager> ().isDead()) {
+			anim.SetTrigger ("isDead");
+		}
+
 		if (Input.GetKey ("up")) {
-			//generateAttack ();
 			Spit();
-			//UndergroundBite ();
+
+		}
+		
+		if (Input.GetKey ("down")) {
+			UndergroundBite();
+
+		}
+		
+		if (Input.GetKey ("right")) {
+			Bite ();
+		}
+		
+		if (Input.GetKey ("left")) {
+			Puke();
 		}
 	}
 }

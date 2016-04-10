@@ -8,20 +8,27 @@ public class PlayerControls : MonoBehaviour {
     public bool cheatsOn = true;
     public GameObject lookObject;
     public GameObject equippedGun;
+	GameObject boss2;
+	GameObject boss1;
     RaycastHit hitInfo;
     Ray shootRay;
     
     // Use this for initialization
     void Start ()
     {
+		boss1 = GameObject.Find("GIANT_WORM");
+		boss2 = GameObject.Find("DRAGON_REX_ALPHA");
         entityInfo = gameObject.GetComponent<EntityInfo>();
     }
 
     // Update is called once per frame
     void Update()
-    {
-		transform.position = new Vector3 (500,transform.position.y,transform.position.z) ;
-        
+	{
+
+		if (Application.loadedLevelName == "Scene1") {
+			transform.position = new Vector3 (500, transform.position.y, transform.position.z);
+		}
+
         if (transform.position.z < lookObject.transform.position.z)
         {
             entityInfo.setFacing(1);
@@ -74,10 +81,13 @@ public class PlayerControls : MonoBehaviour {
                     UnityEngine.Object clone = Instantiate(equippedGun.GetComponent<GunManager>().bullet, hitInfo.point, Quaternion.identity);
                     Destroy(clone, 1f);
 
-                    if (hitInfo.collider.tag == "Boss")
+                    if (hitInfo.collider.name == "GIANT_WORM")
                     {
-                        GameObject.Find("GIANT_WORM").GetComponent<HitPointManager>().subtractHP(equippedGun.GetComponent<GunManager>().damage);
+                        boss1.GetComponent<HitPointManager>().subtractHP(equippedGun.GetComponent<GunManager>().damage);
                     }
+					else if (hitInfo.collider.name == "DRAGON_REX_ALPHA"){
+						boss2.GetComponent<HitPointManager>().subtractHP(equippedGun.GetComponent<GunManager>().damage);
+					}
 
                 }
 
