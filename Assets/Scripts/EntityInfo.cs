@@ -158,6 +158,7 @@ public class EntityInfo : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
+        Cursor.visible = false;
         characterController = gameObject.GetComponent<CharacterController>();
         //PLAYTESTING = 0;
         FREEFORM = false;

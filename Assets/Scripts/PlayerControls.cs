@@ -60,7 +60,6 @@ public class PlayerControls : MonoBehaviour {
 
        
         shootRay = new Ray(equippedGun.transform.position, lookObject.transform.position - equippedGun.transform.position);
-        Debug.DrawLine(equippedGun.transform.position, lookObject.transform.position);
         if (Input.GetMouseButton(0)) // Left button click
         {
             if (equippedGun != null && equippedGun.GetComponent<GunManager>().canShoot())
@@ -92,6 +91,10 @@ public class PlayerControls : MonoBehaviour {
             if (Input.GetKeyDown(KeyCode.LeftShift))
             {
                 gameObject.GetComponent<HitPointManager>().subtractHP(1);
+            }
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                Application.Quit();
             }
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
