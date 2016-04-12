@@ -8,27 +8,19 @@ public class PlayerControls : MonoBehaviour {
     public bool cheatsOn = true;
     public GameObject lookObject;
     public GameObject equippedGun;
-	GameObject boss2;
-	GameObject boss1;
     RaycastHit hitInfo;
     Ray shootRay;
     
     // Use this for initialization
     void Start ()
     {
-		boss1 = GameObject.Find("GIANT_WORM");
-		boss2 = GameObject.Find("DRAGON_REX_ALPHA");
         entityInfo = gameObject.GetComponent<EntityInfo>();
     }
 
     // Update is called once per frame
     void Update()
-	{
-
-		if (Application.loadedLevelName == "Scene1") {
-			transform.position = new Vector3 (500, transform.position.y, transform.position.z);
-		}
-
+    {
+        
         if (transform.position.z < lookObject.transform.position.z)
         {
             entityInfo.setFacing(1);
@@ -73,7 +65,6 @@ public class PlayerControls : MonoBehaviour {
         {
             if (equippedGun != null && equippedGun.GetComponent<GunManager>().canShoot())
             {
-                //equippedGun.GetComponent<GunManager>().muzzleFlash.GetComponent<ParticleSystem>().Play();
 
                 if (Physics.Raycast(shootRay, out hitInfo, equippedGun.GetComponent<GunManager>().aimDistance))
                 {
@@ -81,13 +72,10 @@ public class PlayerControls : MonoBehaviour {
                     UnityEngine.Object clone = Instantiate(equippedGun.GetComponent<GunManager>().bullet, hitInfo.point, Quaternion.identity);
                     Destroy(clone, 1f);
 
-                    if (hitInfo.collider.name == "GIANT_WORM")
+                    if (hitInfo.collider.tag == "Boss")
                     {
-                        boss1.GetComponent<HitPointManager>().subtractHP(equippedGun.GetComponent<GunManager>().damage);
+                        hitInfo.collider.transform.gameObject.GetComponent<HitPointManager>().subtractHP(equippedGun.GetComponent<GunManager>().damage);
                     }
-					else if (hitInfo.collider.name == "DRAGON_REX_ALPHA"){
-						boss2.GetComponent<HitPointManager>().subtractHP(equippedGun.GetComponent<GunManager>().damage);
-					}
 
                 }
 
@@ -104,6 +92,22 @@ public class PlayerControls : MonoBehaviour {
             if (Input.GetKeyDown(KeyCode.LeftShift))
             {
                 gameObject.GetComponent<HitPointManager>().subtractHP(1);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                GameObject.Find("GIANT_WORM").GetComponent<LearningSystem>().updateAttack(0, 1);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                GameObject.Find("GIANT_WORM").GetComponent<LearningSystem>().updateAttack(1, 1);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                GameObject.Find("GIANT_WORM").GetComponent<LearningSystem>().updateAttack(2, 1);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha4))
+            {
+                GameObject.Find("GIANT_WORM").GetComponent<LearningSystem>().updateAttack(3, 1);
             }
         }
     }
