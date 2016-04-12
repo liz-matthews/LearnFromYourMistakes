@@ -2,10 +2,10 @@
 using System.Collections;
 
 public class Level2 : MonoBehaviour {
-	
+	GameObject boss1;
 	// Use this for initialization
 	void Start () {
-		
+		boss1 = GameObject.Find("GIANT_WORM");
 	}
 	
 	// Update is called once per frame
@@ -14,6 +14,8 @@ public class Level2 : MonoBehaviour {
 	}
 	
 	void OnTriggerEnter(Collider hit) {
-		Application.LoadLevel("Scene2");
+		if (boss1.GetComponent<HitPointManager> ().isDead ()) {
+			Application.LoadLevel ("Scene2");
+		}
 	}
 }
